@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NewTransaction extends StatefulWidget {
   final Function addTx;
 
-  NewTransaction(this.addTx);
+  const NewTransaction(this.addTx, {super.key});
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();
@@ -49,7 +49,6 @@ class _NewTransactionState extends State<NewTransaction> {
         _selectedDate = pickedDate;
       });
     });
-    print('...');
   }
 
   @override
@@ -67,16 +66,16 @@ class _NewTransactionState extends State<NewTransaction> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextField(
-                  decoration: InputDecoration(labelText: 'Title'),
+                  decoration: const InputDecoration(labelText: 'Title'),
                   controller: _titleController,
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Amount'),
+                  decoration: const InputDecoration(labelText: 'Amount'),
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   onSubmitted: (_) => _submitData,
                 ),
-                Container(
+                SizedBox(
                   height: 70,
                   child: Row(
                     children: [
@@ -86,20 +85,20 @@ class _NewTransactionState extends State<NewTransaction> {
                               : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}')),
                       TextButton(
                           onPressed: _presentDatePicker,
-                          child: Text('Choose Date'),
                           style: TextButton.styleFrom(
                             foregroundColor: Theme.of(context).primaryColor,
-                          ))
+                          ),
+                          child: const Text('Choose Date'))
                     ],
                   ),
                 ),
                 ElevatedButton(
-                  child: Text(
+                  style: TextButton.styleFrom(foregroundColor: Colors.purple),
+                  onPressed: _submitData,
+                  child: const Text(
                     'Add Transaction',
                     style: TextStyle(color: Colors.white),
                   ),
-                  style: TextButton.styleFrom(primary: Colors.purple),
-                  onPressed: _submitData,
                 )
               ],
             ),

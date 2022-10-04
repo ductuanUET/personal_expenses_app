@@ -6,11 +6,11 @@ class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final Function deleteTx;
 
-  TransactionList(this.transactions, this.deleteTx);
+  const TransactionList(this.transactions, this.deleteTx, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: transactions.isEmpty
           ? LayoutBuilder(builder: (ctx, constraints) {
@@ -18,10 +18,10 @@ class TransactionList extends StatelessWidget {
               children: [
                 Text('No Transactions added yet!',
                     style: Theme.of(context).textTheme.headline6),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Container(
+                SizedBox(
                     height: constraints.maxHeight * 0.6,
                     child: Image.asset('assets/images/waiting.png',
                         fit: BoxFit.cover))
@@ -31,12 +31,12 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: FittedBox(
                             child: Text('\$${transactions[index].amount}')),
                       ),
@@ -50,14 +50,14 @@ class TransactionList extends StatelessWidget {
                     ),
                     trailing:  MediaQuery.of(context).size.width > 480 
                     ? TextButton.icon(
-                      icon: Icon(Icons.delete), 
-                      label: Text('Delete'),
+                      icon: const Icon(Icons.delete), 
+                      label: const Text('Delete'),
                       style: TextButton.styleFrom(foregroundColor: Theme.of(context).errorColor),
                       onPressed: () => deleteTx(transactions[index].id),
                       ) 
                     
                     : IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       color: Theme.of(context).errorColor,
                       onPressed: () => deleteTx(transactions[index].id),
                     ),
